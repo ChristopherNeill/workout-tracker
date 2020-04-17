@@ -1,21 +1,26 @@
 const express = require("express");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 const mongoose = require("mongoose");
 
-const PORT = process.env.PORT || 3000;
+let PORT = process.env.PORT || 3000;
 
 const app = express();
 // const app = morgan();
-
+const mongodbURL = process.env.MONGODB_URI || "mongodb://localhost/workout"
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+//   useNewUrlParser: true,
+//   useFindAndModify: false
+// });
+mongoose.connect(mongodbURL, {
   useNewUrlParser: true,
   useFindAndModify: false
 });
+
 
 // routes
 require("./routes/api-routes.js")(app);
