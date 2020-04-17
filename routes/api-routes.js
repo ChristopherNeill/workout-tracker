@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var db = require("../models");
 
 module.exports = function(app) {
-    
+//get method    
     app.get("/api/workouts", function (req, res) {
     db.Workout.find()
         .then(data => {
@@ -12,7 +12,7 @@ module.exports = function(app) {
             res.json(err)
         })
 });
-
+//post
 app.post("/api/workouts", function (req, res) {
     db.Workout.create({})
         .then(data => res.json(data))
@@ -21,7 +21,7 @@ app.post("/api/workouts", function (req, res) {
             res.json(err)
         })
 });
-
+//put
 app.put("/api/workouts/:id", ({ body, params }, res) => {
     db.Workout.findByIdAndUpdate(
         params.id,
